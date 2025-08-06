@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ApiKeyController extends Controller
 {
     public function generate(Request $request)
     {
-        $userId = $request->user()?->id ?? null;
+        $userId = $request->id ?? null;
+
+        Log::debug('user_id : ' . $userId);
 
         $existing = DB::table('api_keys')->where('user_id', $userId)->first();
 
