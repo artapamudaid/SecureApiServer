@@ -14,8 +14,6 @@ class ApiKeyController extends Controller
     {
         $userId = $request->id ?? null;
 
-        Log::debug('user_id : ' . $userId);
-
         $existing = DB::table('api_keys')->where('user_id', $userId)->first();
 
         if ($existing) {
